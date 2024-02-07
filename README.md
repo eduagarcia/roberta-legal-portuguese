@@ -16,20 +16,14 @@ We compile two main corpora for pre-training: LegalPT, a legal domain-specific c
 | OSCAR-2301 (PT) | General |    18.1    |    97.8    |
 
 
-### Raw version
 - [LegalPT](https://huggingface.co/datasets/eduagarcia/LegalPT) 
-
-- [CrawlPT](https://huggingface.co/datasets/eduagarcia/CrawlPT). Some subsets are also available separatedly: 
-	- [C100-PT](https://huggingface.co/datasets/eduagarcia/cc100-pt). CC100 subset in the Portuguese language.
-
-
-### Deduplicated version
-Deduplication was done by using [MinHash algorithm](https://dl.acm.org/doi/abs/10.5555/647819.736184) and [Locality Sensitive Hashing](https://dspace.mit.edu/bitstream/handle/1721.1/134231/v008a014.pdf?sequence=2&isAllowed=y), following the approach of [Lee et al. (2022)](http://arxiv.org/abs/2107.06499). We used 5-grams and a signature of size 256, considering two documents to be identical if their Jaccard Similarity exceeded 0.7.
-
+- [CrawlPT](https://huggingface.co/datasets/eduagarcia/CrawlPT)
 - [LegalPT (deduplicated)](https://huggingface.co/datasets/eduagarcia/LegalPT_dedup)
 - [CrawlPT (deduplicated)](https://huggingface.co/datasets/eduagarcia/CrawlPT_dedup). Some subsets are also available separatedly: 
 	- [OSCAR-2301-pt (deduplicated)](https://huggingface.co/datasets/eduagarcia/OSCAR-2301-pt_dedup) is a curation from Portuguese subset of [OSCAR-2301](https://huggingface.co/datasets/oscar-corpus/OSCAR-2301). 
 	- [brWaC (deduplicated)](https://huggingface.co/datasets/eduagarcia/brwac_dedup)  is deduplication of [brWaC](https://aclanthology.org/L18-1686/), a web corpus for Brazilian Portuguese from 120,000 different websites.
+
+Deduplication was done by using [MinHash algorithm](https://dl.acm.org/doi/abs/10.5555/647819.736184) and [Locality Sensitive Hashing](https://dspace.mit.edu/bitstream/handle/1721.1/134231/v008a014.pdf?sequence=2&isAllowed=y), following the approach of [Lee et al. (2022)](http://arxiv.org/abs/2107.06499). We used 5-grams and a signature of size 256, considering two documents to be identical if their Jaccard Similarity exceeded 0.7.
 
 ## Datasets
 
@@ -69,7 +63,7 @@ Macro F1-Score (\%) for multiple models evaluated on PortuLex benchmark test spl
 | RoBERTaTimbau-base (Reproduction of BERTimbau)                             | 89.68     | 87.53/85.74     | 78.82       |   82.03   | 84.29           |
 | RoBERTaLegalPT-base (Trained on LegalPT)                                   | 90.59     | 85.45/84.40     | 79.92       |   82.84   | 84.57           |
 | [RoBERTaCrawlPT-base](https://huggingface.co/eduagarcia/RoBERTaCrawlPT-base)  (Trained on CrawlPT)   | 89.24     | 88.22/86.58     | 79.88       |   82.80   | 84.83           |
-| **RoBERTaLexPT-base (this)** (Trained on CrawlPT + LegalPT)                       | **90.73** | **88.56**/86.03 | **80.40**   |   83.22   | **85.41**       |
+| [RoBERTaLexPT-base](https://huggingface.co/eduagarcia/RoBERTaLexPT-base) (Trained on CrawlPT + LegalPT)                       | **90.73** | **88.56**/86.03 | **80.40**   |   83.22   | **85.41**       |
 
 In summary, RoBERTaLexPT consistently achieves top legal NLP effectiveness despite its base size. 
 With sufficient pre-training data, it can surpass larger models. The results highlight the importance of domain-diverse training data over sheer model scale.
