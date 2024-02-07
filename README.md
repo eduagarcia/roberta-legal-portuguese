@@ -30,7 +30,7 @@ Deduplication was done by using [MinHash algorithm](https://dl.acm.org/doi/abs/1
 
 ## Datasets
 
-[PortuLex benchmark](https://huggingface.co/datasets/eduagarcia/PortuLex_benchmark) is a four-task benchmark designed to evaluate the quality and performance of language models in the Portuguese legal
+[PortuLex benchmark](https://huggingface.co/datasets/eduagarcia/PortuLex_benchmark) is a four-task benchmark designed to evaluate the quality and performance of language models in the Portuguese legal context.
 
 | Dataset       | Task | Train | Dev   | Test  |
 |---------------|------|-------|-------|-------|
