@@ -1,6 +1,11 @@
-# Roberta Legal Portuguese
-This repository provides the related resources to the paper [RoBERTaLexPT: A Legal RoBERTa Model pretrained with deduplication for Portuguese]().
+<br />
+<div align="center">
+    <h1 align="center">Roberta Legal Portuguese3</h1>
+    <img src="https://images.emojiterra.com/google/android-11/512px/2696.png" alt="https://emojiterra.com/balance-scale" width="300">
+  <br />
+</div>
 
+This repository provides the related resources to the paper [RoBERTaLexPT: A Legal RoBERTa Model pretrained with deduplication for Portuguese]().
 ## Corpora
 ### Deduplicated
 - [LegalPT (deduplicated)](https://huggingface.co/datasets/eduagarcia/LegalPT_dedup)
