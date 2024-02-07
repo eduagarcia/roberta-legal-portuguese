@@ -7,26 +7,73 @@
 
 This repository provides the related resources to the paper [RoBERTaLexPT: A Legal RoBERTa Model pretrained with deduplication for Portuguese]().
 ## Corpora
-### Deduplicated
-- [LegalPT (deduplicated)](https://huggingface.co/datasets/eduagarcia/LegalPT_dedup) aggregates the maximum amount of publicly available legal data in Portuguese, drawing from varied sources including legislation, jurisprudence, legal articles, and government documents. Deduplicated version.
+We compile two main corpora for pre-training: LegalPT, a legal domain-specific corpus, and CrawlPT, a general corpus used for comparison.
+| Corpus          |  Domain | Tokens (B) | Size (GiB) |
+|-----------------|:-------:|:----------:|:----------:|
+| LegalPT         |  Legal  |    22.5    |    125.1   |
+| brWaC           | General |     2.7    |    16.3    |
+| CC100 (PT)      | General |     8.4    |    49.1    |
+| OSCAR-2301 (PT) | General |    18.1    |    97.8    |
 
-- [CrawlPT (deduplicated)](https://huggingface.co/datasets/eduagarcia/CrawlPT_dedup) corpus provides a large sample of general Portuguese text from the internet. Deduplicated version. Some subsets are also available separatedly: 
+
+### Raw version
+- [LegalPT](https://huggingface.co/datasets/eduagarcia/LegalPT) 
+
+- [CrawlPT](https://huggingface.co/datasets/eduagarcia/CrawlPT). Some subsets are also available separatedly: 
+	- [C100-PT](https://huggingface.co/datasets/eduagarcia/cc100-pt). CC100 subset in the Portuguese language.
+
+
+### Deduplicated version
+Deduplication was done by using [MinHash algorithm](https://dl.acm.org/doi/abs/10.5555/647819.736184) and [Locality Sensitive Hashing](https://dspace.mit.edu/bitstream/handle/1721.1/134231/v008a014.pdf?sequence=2&isAllowed=y), following the approach of [Lee et al. (2022)](http://arxiv.org/abs/2107.06499). We used 5-grams and a signature of size 256, considering two documents to be identical if their Jaccard Similarity exceeded 0.7.
+
+- [LegalPT (deduplicated)](https://huggingface.co/datasets/eduagarcia/LegalPT_dedup)
+- [CrawlPT (deduplicated)](https://huggingface.co/datasets/eduagarcia/CrawlPT_dedup). Some subsets are also available separatedly: 
 	- [OSCAR-2301-pt (deduplicated)](https://huggingface.co/datasets/eduagarcia/OSCAR-2301-pt_dedup) is a curation from Portuguese subset of [OSCAR-2301](https://huggingface.co/datasets/oscar-corpus/OSCAR-2301). 
 	- [brWaC (deduplicated)](https://huggingface.co/datasets/eduagarcia/brwac_dedup)  is deduplication of [brWaC](https://aclanthology.org/L18-1686/), a web corpus for Brazilian Portuguese from 120,000 different websites.
-	
-### Raw
-- [LegalPT](https://huggingface.co/datasets/eduagarcia/LegalPT) aggregates the maximum amount of publicly available legal data in Portuguese, drawing from varied sources including legislation, jurisprudence, legal articles, and government documents. Raw version.
-
-- [CrawlPT](https://huggingface.co/datasets/eduagarcia/CrawlPT_dedup) corpus provides a large sample of general Portuguese text from the internet. Raw version. Some subsets are also available separatedly: 
-	- [C100-PT](https://huggingface.co/datasets/eduagarcia/cc100-pt) is a curation of news articles from CC100 in the Portuguese language. This version of the dataset is the portuguese subset from C100. Raw version.
-
-## Models
-- [RoBERTaLexPT-base](https://huggingface.co/eduagarcia/RoBERTaLexPT-base) is a Portuguese Masked Language Model pretrained from scratch from the LegalPT and CrawlPT corpora, using the same architecture as RoBERTa-base, introduced by [Liu et al. (2019)](https://arxiv.org/abs/1907.11692).
-
-- [RoBERTaCrawlPT-base](https://huggingface.co/eduagarcia/RoBERTaCrawlPT-base) is a generic Portuguese Masked Language Model pretrained from scratch from the CrawlPT corpora, using the same architecture as [RoBERTa-base](https://arxiv.org/abs/1907.11692). 
 
 ## Datasets
-- [PortuLex benchmark](https://huggingface.co/datasets/eduagarcia/PortuLex_benchmark) is a four-task benchmark designed to evaluate the quality and performance of language models in the Portuguese legal
+
+[PortuLex benchmark](https://huggingface.co/datasets/eduagarcia/PortuLex_benchmark) is a four-task benchmark designed to evaluate the quality and performance of language models in the Portuguese legal
+
+| Dataset       | Task | Train | Dev   | Test  |
+|---------------|------|-------|-------|-------|
+| RRI           | CLS  | 8.26k | 1.05k | 1.47k |
+| LeNER-Br      | NER  | 7.83k | 1.18k | 1,39k |
+| UlyssesNER-Br | NER  | 3.28k | 489   | 524   |
+| FGV-STF       | NER  | 415   | 60    | 119   |
+
+
+## Models
+Our model was pretrained in four different configurations:
+- Solely on BrWaC (RoBERTaTimbau_base).
+- Solely on the LegalPT corpus (RoBERTaLegalPT-base)
+- Solely on the CrawlPT corpus ([RoBERTaCrawlPT-base](https://huggingface.co/eduagarcia/RoBERTaCrawlPT-base))
+- Combining both corpora ([RoBERTaLexPT-base](https://huggingface.co/eduagarcia/RoBERTaLexPT-base))
+
+Macro F1-Score (\%) for multiple models evaluated on PortuLex benchmark test splits:
+
+| **Model**                                                                  | **LeNER** | **UlyNER-PL**   | **FGV-STF** |  **RRIP** | **Average (%)** |
+|----------------------------------------------------------------------------|-----------|-----------------|-------------|:---------:|-----------------|
+|                                                                            |           | Coarse/Fine     | Coarse      |           |                 |
+| [BERTimbau-base](https://huggingface.co/neuralmind/bert-base-portuguese-cased)  | 88.34     | 86.39/83.83     | 79.34       |   82.34   | 83.78           |
+| [BERTimbau-large](https://huggingface.co/neuralmind/bert-large-portuguese-cased) | 88.64     | 87.77/84.74     | 79.71       | **83.79** | 84.60           |
+| [Albertina-PT-BR-base](https://huggingface.co/PORTULAN/albertina-ptbr-based)                   | 89.26     | 86.35/84.63     | 79.30       |   81.16   | 83.80           |
+| [Albertina-PT-BR-xlarge](https://huggingface.co/PORTULAN/albertina-ptbr)                 | 90.09     | 88.36/**86.62** | 79.94       |   82.79   | 85.08           |
+| [BERTikal-base](https://huggingface.co/felipemaiapolo/legalnlp-bert)                          | 83.68     | 79.21/75.70     | 77.73       |   81.11   | 79.99           |
+| [JurisBERT-base](https://huggingface.co/alfaneo/jurisbert-base-portuguese-uncased)        | 81.74     | 81.67/77.97     | 76.04       |   80.85   | 79.61           |
+| [BERTimbauLAW-base](https://huggingface.co/alfaneo/bertimbaulaw-base-portuguese-cased)     | 84.90     | 87.11/84.42     | 79.78       |   82.35   | 83.20           |
+| [Legal-XLM-R-base](https://huggingface.co/joelniklaus/legal-xlm-roberta-base)                       | 87.48     | 83.49/83.16     | 79.79       |   82.35   | 83.24           |
+| [Legal-XLM-R-large](https://huggingface.co/joelniklaus/legal-xlm-roberta-large)                      | 88.39     | 84.65/84.55     | 79.36       |   81.66   | 83.50           |
+| [Legal-RoBERTa-PT-large](https://huggingface.co/joelniklaus/legal-portuguese-roberta-large)                 | 87.96     | 88.32/84.83     | 79.57       |   81.98   | 84.02           |
+| **Ours**                                                                   |           |                 |             |           |                 |
+| RoBERTaTimbau-base (Reproduction of BERTimbau)                             | 89.68     | 87.53/85.74     | 78.82       |   82.03   | 84.29           |
+| RoBERTaLegalPT-base (Trained on LegalPT)                                   | 90.59     | 85.45/84.40     | 79.92       |   82.84   | 84.57           |
+| [RoBERTaCrawlPT-base](https://huggingface.co/eduagarcia/RoBERTaCrawlPT-base)  (Trained on CrawlPT)   | 89.24     | 88.22/86.58     | 79.88       |   82.80   | 84.83           |
+| **RoBERTaLexPT-base (this)** (Trained on CrawlPT + LegalPT)                       | **90.73** | **88.56**/86.03 | **80.40**   |   83.22   | **85.41**       |
+
+In summary, RoBERTaLexPT consistently achieves top legal NLP effectiveness despite its base size. 
+With sufficient pre-training data, it can surpass larger models. The results highlight the importance of domain-diverse training data over sheer model scale.
+
 
 ## Citation
 
