@@ -12,8 +12,8 @@ This repository provides the related resources to the paper [RoBERTaLexPT: A Leg
 
 ## Corpora
 We compile two main corpora for pre-training: 
-- [LegalPT](https://huggingface.co/datasets/eduagarcia/LegalPT), a legal domain-specific corpus
-- [CrawlPT](https://huggingface.co/datasets/eduagarcia/CrawlPT), a general corpus used for comparison.
+- [LegalPT](https://huggingface.co/datasets/eduagarcia/LegalPT), a Portuguese legal domain-specific corpus
+- [CrawlPT](https://huggingface.co/datasets/eduagarcia/CrawlPT), a Portuguese general corpus used for comparison.
 
 | Corpus          |  Domain | Tokens (B) | Size (GiB) |
 |-----------------|:-------:|:----------:|:----------:|
