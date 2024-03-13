@@ -75,19 +75,29 @@ With sufficient pre-training data, it can surpass larger models. The results hig
 ## Citation
 
 ```bibtex
-@InProceedings{garcia2024_roberlexpt,
-    author="Garcia, Eduardo A. S.
-    and Silva, N{\'a}dia F. F.
-    and Siqueira, Felipe
-    and Gomes, Juliana R. S.
-    and Albuqueruqe, Hidelberg O.
-    and Souza, Ellen
-    and Lima, Eliomar
-    and De Carvalho, André",
-    title="RoBERTaLexPT: A Legal RoBERTa Model pretrained with deduplication for Portuguese",
-    booktitle="Computational Processing of the Portuguese Language",
-    year="2024",
-    publisher="Association for Computational Linguistics"
+@inproceedings{garcia-etal-2024-robertalexpt,
+    title = "{R}o{BERT}a{L}ex{PT}: A Legal {R}o{BERT}a Model pretrained with deduplication for {P}ortuguese",
+    author = "Garcia, Eduardo A. S.  and
+      Silva, Nadia F. F.  and
+      Siqueira, Felipe  and
+      Albuquerque, Hidelberg O.  and
+      Gomes, Juliana R. S.  and
+      Souza, Ellen  and
+      Lima, Eliomar A.",
+    editor = "Gamallo, Pablo  and
+      Claro, Daniela  and
+      Teixeira, Ant{\'o}nio  and
+      Real, Livy  and
+      Garcia, Marcos  and
+      Oliveira, Hugo Gon{\c{c}}alo  and
+      Amaro, Raquel",
+    booktitle = "Proceedings of the 16th International Conference on Computational Processing of Portuguese",
+    month = mar,
+    year = "2024",
+    address = "Santiago de Compostela, Galicia/Spain",
+    publisher = "Association for Computational Lingustics",
+    url = "https://aclanthology.org/2024.propor-1.38",
+    pages = "374--383",
 }
 ```
 
