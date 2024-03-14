@@ -5,7 +5,7 @@
   <br />
 </div>
 
-This repository provides the related resources to the paper [RoBERTaLexPT: A Legal RoBERTa Model pretrained with deduplication for Portuguese]().
+This repository provides the related resources to the paper [RoBERTaLexPT: A Legal RoBERTa Model pretrained with deduplication for Portuguese](https://aclanthology.org/2024.propor-1.38/).
 
 > [!TIP]
 > Check out [Roberta Legal Portuguese](https://huggingface.co/collections/eduagarcia/roberta-legal-portuguese-65c3f7247d10ab35a75de3e9) in 🤗 Collection! 
